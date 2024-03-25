@@ -3,9 +3,9 @@
 #include <time.h>
 #include <iostream>
 #include <queue>
-#include<random>
+#include <random>
 
-#include "simulation.cpp"
+#include "simulation.h"
 
 void argChecktoConsole(int flag){
 	switch(flag){
