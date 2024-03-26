@@ -15,33 +15,34 @@ Event::Event()
 }
 
 
-Simulation::Simulation(float lambda, float CPUServiceTime){
-			clock = 0;
-			processCount = 0;
-			totalProcesses = 0;
-			cpu_busy = false;
-			eventsEmpty = false;
-			numCPU_Busy = 0;
-			numPolls = 0;
-			numInRq = 0;
-			numProcesses = 10000;
-			turnarounds = 0;
-			INIT_process = new Process(0,0,0);
-			INIT_event = new Event(0,1,INIT_process);
-			pollProccess =  new Process(-1,0,0); //polling process, not actually used
-			INIT_poll = new Event(0.1,3,pollProccess);
-			
-			eventQ.push_back(INIT_event);
-			eventQ.push_back(INIT_poll);
-		
-			float genTime = 0;
+Simulation::Simulation(float lambda, float CPUServiceTime)
+{
+	clock = 0;
+	processCount = 0;
+	totalProcesses = 0;
+	cpu_busy = false;
+	eventsEmpty = false;
+	numCPU_Busy = 0;
+	numPolls = 0;
+	numInRq = 0;
+	numProcesses = 10000;
+	turnarounds = 0;
+	INIT_process = new Process(0,0,0);
+	INIT_event = new Event(0,1,INIT_process);
+	pollProccess =  new Process(-1,0,0); //polling process, not actually used
+	INIT_poll = new Event(0.1,3,pollProccess);
+	
+	eventQ.push_back(INIT_event);
+	eventQ.push_back(INIT_poll);
 
-			for (int i = 0; i < numProcesses; i++){
-				float interArrivalTime = exponentialRandom(lambda);
-				genTime += interArrivalTime;
-				Process* newProcess = new Process(i+1, genTime, exponentialRandom(1/CPUServiceTime));
-				readyQ.push_back(newProcess);
-			}
+	float genTime = 0;
+
+	for (int i = 0; i < numProcesses; i++){
+		float interArrivalTime = exponentialRandom(lambda);
+		genTime += interArrivalTime;
+		Process* newProcess = new Process(i+1, genTime, exponentialRandom(1/CPUServiceTime));
+		readyQ.push_back(newProcess);
+	}
 }
 
 float Simulation::exponentialRandom(float lambda){
@@ -51,7 +52,8 @@ float Simulation::exponentialRandom(float lambda){
 
 void Simulation::scheduleEvent(Event* newEvent){
 			//schedules new event at first if the new schedule is empty or the new events time is before the first events time
-			if(eventQ.empty() || newEvent->time < eventQ.front()->time){ eventQ.push_front(newEvent); }				
+			if(eventQ.empty() || newEvent->time < eventQ.front()->time)
+				{ eventQ.push_front(newEvent); }				
 			else{
 				
 				//standard c++ library list data structure implemented as a doubly linked list, so we need an event iterator 

@@ -44,12 +44,13 @@ int checkNumArgs(int argc, char* argv[]){
 int main(int argc, char* argv[]){
 
 	//checks argument number, range, and type 
-	int flag = checkNumArgs(argc, argv);
-	if(flag > 0){	return 1;	}
+	// int flag = checkNumArgs(argc, argv);
+	// if(flag > 0){	return 1;	}
 
 	float lambda = std::stod(argv[1]); //gets arrival rate from command line argument 
 	float CPUServiceTime = std::stod(argv[2]);
 	//double DiskServiceTime = std::stod(argv[3]); 	for OS project, not needed for CSF homework 4
+
 
 	srand(time(0));
 	
