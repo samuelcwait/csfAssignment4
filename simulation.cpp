@@ -41,7 +41,7 @@ Simulation::Simulation(float lambda, float CPUServiceTime)
 		float interArrivalTime = exponentialRandom(lambda);
 		genTime += interArrivalTime;
 		Process* newProcess = new Process(i+1, genTime, exponentialRandom(1/CPUServiceTime));
-		readyQ.push_back(newProcess);
+		processList.push_back(newProcess);
 	}
 }
 

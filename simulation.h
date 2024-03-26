@@ -50,6 +50,7 @@ class Simulation{
 		Event* INIT_event;
 		Process* pollProccess; //polling process, not actually used
 		Event* INIT_poll;
+        std::list<Process*> processList;
 
 		//Generates and returns exponentially distributed interarrival times, service times based on given lambda 
 		float exponentialRandom(float lambda);
