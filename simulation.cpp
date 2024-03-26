@@ -1,17 +1,19 @@
 #include "simulation.h"
 
-Process::Process(int PID, float arrival_time, float service_time)
-		{
-			this->PID = PID;
-			this->arrival_time = arrival_time;
-			this->service_time = service_time;
-		}
+Event::Event(float time, int type, Process* process)
+{ 
+	this->time = time;
+	this->type = type;
+	this->process = process; 
+}
 
-Event::Event(float time, int type, Process* Process){ 
-			this->time = time;
-			this->type = type;
-			this->process = Process; 
-		}
+Event::Event()
+{
+	time = 0;
+	type = 0;
+	process = nullptr;
+}
+
 
 Simulation::Simulation(float lambda, float CPUServiceTime){
 			clock = 0;
